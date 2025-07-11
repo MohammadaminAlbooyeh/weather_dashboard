@@ -43,7 +43,7 @@ def home():
 @app.route('/api/weather', methods=['GET'])
 def get_weather():
     city = request.args.get('city', 'Tehran')
-    weather = Weather.query.filter_by(city=city).first()
+    weather = Weather.query.filter(db.func.lower(Weather.city) == city.lower()).first()
     if weather:
         return jsonify({
             "city": weather.city,
@@ -60,4 +60,4 @@ def get_weather():
 if __name__ == '__main__':
     with app.app_context():
         create_tables()
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
