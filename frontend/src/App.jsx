@@ -14,7 +14,7 @@ function App() {
     setError('');
     setTemperature(null);
     try {
-      const res = await fetch(`http://localhost:8000/api/weather/?city=${encodeURIComponent(city)}`);
+            const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
       if (!res.ok) {
         throw new Error('City not found or server error');
       }
